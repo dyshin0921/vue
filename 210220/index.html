@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- script[src=./vue/lib/vue.js] 젠코딩 -->
+    <script src="./vue/lib/vue.js"></script>
+</head>
+<body>
+    젠코딩 예제
+
+    div>ul>li*6
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    div>{lerem}
+    <div>lerem</div>
+    div{apple}
+    <div>apple</div>
+
+    div+div+div
+    <div></div>
+    <div></div>
+    <div></div>
+
+    div>ul>li*3^^div>ul>li*3
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    div#section>ul>li.slide.slide$*5
+    <div id="section">
+        <ul>
+            <li class="slide slide1"></li>
+            <li class="slide slide2"></li>
+            <li class="slide slide3"></li>
+            <li class="slide slide4"></li>
+            <li class="slide slide5"></li>
+        </ul>
+    </div>
+
+    div#gallery>ul>li*5.gallery-img>img[src=./img/image$$.jpg]
+    <div id="gallery">
+        <ul>
+            <li class="gallery-img"><img src="./img/image01.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image02.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image03.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image04.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image05.jpg" alt=""></li>
+        </ul>
+    </div>
+
+    div#gallery>ul>li*5.gallery-img>img[src=./img/image$$@0.jpg]  @는 시작 번호 지정
+    <div id="gallery">
+        <ul>
+            <li class="gallery-img"><img src="./img/image00.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image01.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image02.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image03.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image04.jpg" alt=""></li>
+        </ul>
+    </div>
+</body>
+</html>
