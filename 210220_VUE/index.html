@@ -12,7 +12,7 @@
     <!-- 마크업 - DOM (View) -->
     <div id="app">
         <h1>자바스크립트 프레임워크 Vue.js 공부하기</h1>
-        <h2>뷰 데이터 속성 바인딩 하기 / {{ msg }} / 머스테시 안에 바인딩 속성 넣기 </h2>
+        <h2 @click='ex'>뷰 데이터 속성 바인딩 하기 / {{ msg }} / 머스테시 안에 바인딩 속성 넣기 </h2>
         <p> {{ txt }} </p>
     </div>
 
@@ -20,10 +20,15 @@
     <script>
         // vue 생성
         var obj = new Vue({
-            el: '#app',
-            data: { // 속성 방식
-                msg: '자바스크립트 data',
-                txt: 'JAVASCRIPT VUE.JS'
+            el:'#app',
+            data:{ // 속성 방식
+                msg:'자바스크립트 data',
+                txt:'JAVASCRIPT VUE.JS'
+            },
+            methods:{
+                ex:function(){
+                    this.msg = 'v-on:click'
+                }
             }
         }); 
     </script>
@@ -32,27 +37,66 @@
 
     <div id="header">
         <h1>MVVM 모델링</h1>
-        <h2> {{ msg }} </h2>
+        <h2 @click='click'> {{ msg }} </h2>
         <p> {{ txt }} </p>
     </div>
 
     <script>
         var headerObj = new Vue({
-            el: '#header',
-            data: function(){ // 메서드 방식은 반드시 return { 속성(property) : 값(value) }
+            el:'#header',
+            data:function(){ // 메서드 방식은 반드시 return { 속성(property) :값(value) }
                 return{
-                    msg: 'MVVM 패턴',
-                    txt: 1234
+                    msg:'MVVM 패턴',
+                    txt:1234
                 } 
-            }
+            },
             /* 
             ECMA6 에서는 data(){} 로 쓰임
             */
+            methods:{
+                click:function(){
+                    this.msg = '신다연';
+                    this.txt = '수업 중';
+                }
+            }
+        })
+    </script>
+
+    <hr>
+
+    <div id="main">
+        <!-- 
+            v-on 디렉티브 = @ 으로 사용 가능
+            v-bind:속성을 지정할 때 쓰임 = :로 사용 가능
+
+            p 를 클릭하면 message 데이터 속성을 변경하는 이벤트 실행
+            v-on:click='(메서드)함수 호출'
+        -->
+        <!-- <p v-on:click='btn'> {{ message }} </p> -->
+        <p @click='btn'> {{ message }} </p>
+    </div>
+
+    <script>
+        var mainObj = new Vue({
+            el:'#main',
+            data(){
+                return{ message:'클릭하세요' }
+            },
+            methods:{
+                btn:function(){  // 메서드(리터럴) 함수
+                    var that = this;
+
+                    alert('메서드 호출 실행');
+                    that.message = 'Vue.js' // 속성 변경
+                    // this 는 mainObj
+                    // 메서드 함수 내에서는 속성 값 대입 연산자는 = 사용
+                }
+            }
         })
     </script>
 
     <style>
-        h2,p{color:#39b;background: #ddd;display: inline-flex;padding: 10px 20px;font-size:30px;font-weight:normal;}
+        h2,p{color:#39b;background:#ddd;display:inline-flex;padding:10px 20px;font-size:30px;font-weight:normal}
     </style>
 
 </body>
