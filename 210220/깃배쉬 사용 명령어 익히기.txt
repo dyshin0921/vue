@@ -1,0 +1,75 @@
+D:/주말_재직자_신다연/github/vue  역슬래쉬 아님
+
+https://github.com/dyshin0921/vue.git
+
+/////////////////////////////////////////////////////////////
+[ 깃설정 (환경설정) ] git bash
+/////////////////////////////////////////////////////////////
+
+주말반@1304-16 MINGW64 ~
+$ pwd
+/c/Users/주말반
+
+주말반@1304-16 MINGW64 ~
+$ cd D:/주말_재직자_신다연/github/vue
+
+주말반@1304-16 MINGW64 /d/주말_재직자_신다연/github/vue
+$ git init
+Initialized empty Git repository in D:/주말_재직자_신다연/github/vue/.git/
+
+주말반@1304-16 MINGW64 /d/주말_재직자_신다연/github/vue (master)
+$ ls
+210220/
+
+주말반@1304-16 MINGW64 /d/주말_재직자_신다연/github/vue (master)
+$ ls -la
+total 4
+drwxr-xr-x 1 주말반 197121 0 Feb 20 12:29 ./
+drwxr-xr-x 1 주말반 197121 0 Feb 20 12:09 ../
+drwxr-xr-x 1 주말반 197121 0 Feb 20 12:29 .git/
+drwxr-xr-x 1 주말반 197121 0 Feb 20 12:09 210220/
+
+
+//////////////////////////////////////////////////////////////
+원격 접속(리모트remote) 필요한 것 : 사용자 이메일과 사용자 이름
+
+// 사용자(user) 이메일(email)
+// 사용자(user) 이름(name)
+$ git config user.email ekdusosdy@naver.com
+$ git config user.name 'dyshin0921'
+
+
+// 깃허브 리포지토리(저장소) 원격 추가(add) 접속
+$ git remote add origin https://github.com/dyshin0921/vue.git
+
+// 확인
+$ git remote -v
+origin  https://github.com/dyshin0921/vue.git (fetch)
+origin  https://github.com/dyshin0921/vue.git (push)
+
+
+// 파일 올리기 업로드(Push)
+1. 
+    업로드할 파일 선택한다.
+    스테이징(올릴 파일을 스테이징에 올린다.)
+    git add .
+
+2.
+    커밋(commit)한다. 
+    수정, 삭제, 추가된 것들을 검증한다.
+    git commit -m '2021-02-20 vs code 젠코딩 공부 내용'  ( 메세지 내용 입력 )
+
+    $ git commit -m '2021-02-20 vs code 젠코딩'
+    On branch master
+
+    Initial commit
+
+    Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+            210220/
+
+    nothing added to commit but untracked files present (use "git add" to track)
+
+3. 
+    최종 업로드 하기(Push)
+    git push origin master
