@@ -35,7 +35,7 @@ drwxr-xr-x 1 주말반 197121 0 Feb 20 12:09 210220/
 
 // 사용자(user) 이메일(email)
 // 사용자(user) 이름(name)
-$ git config user.email ekdusosdy@naver.com
+$ git config user.email 'ekdusosdy@naver.com'
 $ git config user.name 'dyshin0921'
 
 
@@ -72,4 +72,16 @@ origin  https://github.com/dyshin0921/vue.git (push)
 
 3. 
     최종 업로드 하기(Push)
-    git push origin master
+    $ git push origin master
+
+//////////////////////////////////////////////////////////////
+
+집에서 처음 시작할 때
+$ cd 다운받을 파일 경로
+$ git clone https://github.com/dyshin0921/vue.git
+
+학원에서 과제물 다운
+// Pull
+4. 
+    업로드된 내용을 다운 받을 때 (Pull)
+    $ git pull origin master
