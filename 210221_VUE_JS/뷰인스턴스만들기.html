@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 인스턴스 만들기 & 자바스크립트 객체와 함수</title>
+    <style>
+        table{width:600px;margin:0 auto;}
+        table th,
+        table td{border: 1px solid #ccc;height:50px;text-align: center;}
+        table#table td:nth-child(2){text-align:left;padding-left:10px;}
+    </style>
+</head>
+<body>
+    <h1>리터럴 방식 클래스 인스턴스 만들기</h1>
+    <h2>주소부</h2>
+    <table id="table">
+    </table>
+    <table id="sungjuk">
+        <tr><th>번호</th><th>이름</th><th>kor</th><th>eng</th><th>mat</th></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <script>
+        /* 
+        var app = {};           // 리터럴 방식
+        var app = new Object(); // 생성자 방식. 같은 뜻
+        var app = [];           // 리터럴 방식 ( 배열 )
+        var app = new Array();  // 생성자 방식 ( 배열 객체 ) 
+        */
+
+        // 인스턴스(객체) 생성
+        var vue = {
+            cnt: 0, // 프로퍼티(멤버 변수)
+            el: '<h1>프로퍼티(멤버 변수) 템플릿</h1>',
+            method: ['피자', '칼국수', '김밥', '라면', '스파게티'],
+            main: {
+                student: [
+                    { 번호:1, 이름:'홍길동', kor:100, eng:80, mat:91 },
+                    { 번호:2, 이름:'가나다', kor:090, eng:90, mat:93 },
+                    { 번호:3, 이름:'라마바', kor:095, eng:70, mat:85 },
+                    { 번호:4, 이름:'사아자', kor:100, eng:90, mat:91 },
+                    { 번호:5, 이름:'차카타', kor:085, eng:60, mat:88 }
+                    // {"번호":5, "이름":"홍길동", "kor":100, "eng":90, "mat":95} 제이슨에서는 인용부호(쌍따움표) 필수
+                    // 제이슨에서는 마지막 줄에 , 를 붙이지 않는다 ?
+                ], 
+                address: [
+                    { 이름:'홍길동', 주소:'서울시 서초구 서초동' },
+                    { 이름:'가나다', 주소:'서울시 관악구 신림동' },
+                    { 이름:'라마바', 주소:'서울시 양천구 목동' },
+                    { 이름:'사아자', 주소:'서울시 서초구 서초동' },
+                    { 이름:'차카타', 주소:'서울시 마포구 연남동' }
+                ]
+            },
+            init: function(){ // 메서드(멤버 함수)
+                // this 인스턴스(객체)
+                this.cnt= 500;
+                this.el += '<h2>프로퍼티(멤버 변수)에 템플릿 내용 추가</h2>'; // 추가 시에는 += 
+                console.log(this.cnt);
+                console.log(this.el);
+            },
+            compute: function(){
+                console.log(this.method);
+                console.log(this.method[0]);
+                
+                console.log(this.main); // 프로퍼티 전체
+                console.log(this.main.student); // 인스턴스.프로퍼티.프로퍼티
+                console.log(this.main.student[3]);
+                console.log(this.main.student[3].이름); // 최종 프로퍼티 값(value)
+                var tot = this.main.student[3].kor + this.main.student[3].eng + this.main.student[3].mat;
+                console.log( '총점 : ' + tot ); // ES5
+                console.log( `총점 : ${tot}` ); // ES6 ${변수명} (문자와 구분)
+
+                console.log(this.main.address[2].이름);
+                console.log(this.main.address[2].주소);
+
+                // -----------------------------------------------
+                // 주소부 템플릿에 출력
+                // 반복문 이용
+                var txt = ''; // 출력 내용 보관하는 변수
+                    txt = '<tr><th>이름</th><th>주소</th></tr>'; // 제목 1회 출력
+                    txt += '<tr><td>'+ this.main.address[0].이름 +'</td><td>'+ this.main.address[0].주소 +'</td></tr>'  // 5회 반복
+                    
+                // 반복 처리
+                // 자바스크립트 객체 배열 처리
+                this.main.address.forEach(function(el, index, arr){
+                    console.log(el,index,arr);
+                    txt += '<tr><td>'+ el.이름 +'</td><td>'+ el.주소 +'</td></tr>';
+                });
+
+                var $table =  document.querySelector('#table');
+                
+                $table.innerHTML = txt;
+
+               
+                var txt2 = '';
+                    txt2 = '<tr><th>번호</th><th>이름</th><th>kor</th><th>eng</th><th>mat</th></tr>';
+                    txt2 += '<tr><td>'+ 1 +'</td><td>'+ '홍길동' +'</td><td>'+ 100 +'</td><td>'+ 90 +'</td><td>'+ 90 +'</td>';
+                    
+                this.main.student.forEach(function(el, idx, arr){
+                    txt2 += '<tr><td>'+ el.번호 +'</td><td>'+ el.이름 +'</td><td>'+ el.kor +'</td><td>'+ el.eng +'</td><td>'+ el.mat +'</td>';
+                })
+
+                var $sungjuk = document.querySelector('#sungjuk');
+
+                $sungjuk.innerHTML = txt2;
+            },
+            run: function(){ // 인스턴스 전체 실행 메서드
+                this.init();
+                this.compute();
+            }
+        } // 인스턴스(객체) 끝
+
+        // vue.init(); // vue 인스턴스(객체) 안에 init 이라는 메서드(멤버 함수) 실행
+        // vue.compute();
+        vue.run(); 
+
+    </script>
+</body>
+</html>

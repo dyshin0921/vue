@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습</title>
+    <style>
+        table th,
+        table td{border: 1px solid #999;}
+    </style>
+</head>
+<body>
+    <h1>리터럴 방식 실습</h1>
+    <table id="people">
+    </table>
+
+    <script>
+        var ex = {
+            el: '이것은 실습입니다.',
+            data: {
+                abc: [
+                    { 이름:'유재석', 나이:'40', 주소:'서울 강남구'},
+                    { 이름:'차은우', 나이:'25', 주소:'서울 용산구'},
+                    { 이름:'이승기', 나이:'30', 주소:'서울 마포구'}
+                ],
+                tv: [
+                    { 제목:'놀면 뭐하니', 요일:'토요일'},
+                    { 제목:'1박 2일', 요일:'일요일'},
+                    { 제목:'런온', 요일:'수요일, 목요일'},
+                ]
+            },
+            method1: function(){
+                this.el += ' 추가된 내용';
+                console.log(this.el);
+            },
+            method2: function(){
+                console.log(this.data.abc[0].이름);
+                console.log(this.data.abc[0].나이);
+            },
+            method3: function(){
+                console.log(this.data.tv[0].제목)
+                var txt = '';
+                    txt = '<tr><th>이름</th><th>나이</th><th>주소</th></tr>'
+
+                this.data.abc.forEach(function(el,i,arr){
+                    txt += '<tr><td>'+ el.이름 +'</td><td>'+ el.나이 +'</td><td>'+ el.주소 +'</td></tr>'
+                })    
+
+                var $people = document.querySelector('#people');
+                $people.innerHTML = txt;
+            },
+            init: function(){
+                this.method1();
+                this.method2();
+                this.method3();
+            }
+        }  
+        ex.init();  
+    </script>
+</body>
+</html>
