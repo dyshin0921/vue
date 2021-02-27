@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디렉티브 v-for v-on / 라이프사이클 & 제이쿼리 사용</title>
+    <!-- 오픈소스 -->
+    <script src="vue/lib/vue.js"></script>
+    <style>
+        img:nth-of-type(1){width:100px}
+        #fruit{padding:10px 30px}
+    </style>
+</head>
+<body>
+    <!-- HTML -->
+    <div id="app">
+        <h1>a의 값(Value) : {{ a }} / b의 값(Value) : {{ b }}</h1>
+        <h2 v-if="a">조건문(v-if)이 참(True)인 경우</h2>
+        <h2 v-if="b">조건문(v-if)이 거짓(False)인 경우</h2>
+        <h2>v-if ~ v-else-if ~ v-else</h2>
+        <div class="if-box">
+            <ul>
+                <li v-if="cho1">짜장면</li>
+                <li v-else-if="cho2">탕수육</li>
+                <li v-else>팔보채</li>
+            </ul>
+        </div>
+        <hr>
+        <h3><a v-bind:href='url' v-bind:title="title">vue.js 사이트 가기</a></h3>
+        <h3><img :src="imgurl" :alt="imgalt" :title="imgalt"></h3>
+        <h3><img :src=`https://vuejs.org/images/autocode.svg`></h3>
+        <hr>
+        <h2>오늘의 날짜는 : {{ nowDate }}</h2>
+        <h2>오늘의 날짜는 : {{ nowDate.getFullYear() }} - {{ nowDate.getMonth()+1 }} - {{ nowDate.getDate() }}</h2>
+        <hr>
+        <h2>셀렉트 박스 옵션 선택 v-model</h2>
+        <select name="fruit" id="fruit" v-model="select">
+            <option value="">좋아하는 과일을 선택하세요</option>
+            <option value="딸기">딸기</option>
+            <option value="사과">사과</option>
+            <option value="바나나">바나나</option>
+            <option value="자몽">자몽</option>
+        </select>
+        <h3>선택 옵션은 : {{ select }}</h3>
+        <hr>
+        <h2>체크박스 v-model</h2>
+        <div class="check-box">
+            <input type="checkbox" name="" id="chk1" value="체크1" v-model="chk"><label for="chk1">체크1</label>
+            <input type="checkbox" name="" id="chk2" value="체크2" v-model="chk"><label for="chk2">체크2</label>
+            <input type="checkbox" name="" id="chk3" value="체크3" v-model="chk"><label for="chk3">체크3</label>
+            <input type="checkbox" name="" id="chk4" value="체크4" v-model="chk"><label for="chk4">체크4</label>
+        </div>
+        <h2>체크 항목 : {{ chk }}</h2>
+        <hr>
+        <h2>라디오버튼 v-model</h2>
+        <div class="radio-box">
+            <input type="radio" name="chk" id="idchk1" value="여성" v-model="gender"><label for="idchk1">여성</label>
+            <input type="radio" name="chk" id="idchk2" value="남성" v-model="gender"><label for="idchk2">남성</label>
+        </div>
+        <h2>선택 항목 : {{ gender }}</h2>
+        <hr>
+        <h2>입력상자 텍스트를 이용한 응용 v-model</h2>
+        <div class="text-box">
+            <label for="irum">회원 이름</label>
+            <input type="text" id="irum" v-model="value" v-on:keyup="eventFn">
+            <h2>{{ value }}</h2>
+            <h3 v-show="x">회원 이름을 입력하세요!</h3>
+        </div>
+    </div>
+
+    <!-- Vue.js -->
+    <script>
+        const obj= new Vue({
+            el: '#app',
+            data: {
+                a: true,
+                b: false,
+                cho1: false,
+                cho2: true,
+                url: 'https://kr.vuejs.org',
+                title: 'vue.js 사이트 바로가기',
+                imgurl:'https://vuejs.org/images/logo.png',
+                imgalt: 'Vue 로고 이미지',
+                nowDate: new Date(), // 생성자 함수 첫글자는 대문자
+                select: '',
+                chk: [],  // 선택사항(체크박스 항목) 배열 지정
+                gender: '',
+                value: '',
+                x: true
+            },
+            methods: {
+                eventFn: function(){
+                    this.x = false; // 키보드가 입력이 되고 올라 오면 keyup
+                }
+            }
+        });
+    </script>
+</body>
+</html>

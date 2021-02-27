@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디렉티브 v-for v-on / 라이프사이클 & 제이쿼리 사용</title>
+    <!-- 오픈소스 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="vue/lib/vue.js"></script> <!-- vue.js를 먼저 써도 상관 없음 -->
+</head>
+<body>
+    <!-- HTML -->
+    <div id="header">
+        <h1 class="h1-btn">헤더 영역의 뷰 라이프 사이클</h1>
+        <h2>머스테시 표시 안에 데이터 소성(멤버변수) 출력 {{ msg }}</h2>
+        <p v-on:click="price">제품 가격은 {{ num }}원 입니다.</p>
+        <p @click="product">v-on: 디렉티브를 @ 디렉티브로 대체 사용. 제품 가격은 {{ num }}원 입니다.</p>
+        <button type="button" @click="price">버튼</button>
+    </div>    
+
+    <!-- Vue.js -->
+    <script>
+        const header = new Vue({ // 뷰의 인스턴스 생성
+            el: '#header',
+            data: {
+                msg: '뷰 인스턴스 데이터 메시지',
+                num: 590
+            },
+            methods: { // 메서드 관리 해주는 속성
+                // 메서드(리터럴=익명) 함수
+                product: function(){
+                // this.num = 100
+                // header.num = 100 같은 값
+                    let that = this;
+                    that.num += 100;
+                    this.msg = '데이터 메시지 수정';
+                },
+                price: function(){
+                    this.num += 100000;
+                }
+            },
+            beforeCreate: function(){
+                // 만들어지기 전 단계
+                console.log('Vue 생명주기 beforeCreate');
+            },
+            created: function(){
+                // el,data.. 사용할 수 있는 단계
+                console.log('Vue 생명주기 created');
+            },
+            beforeMounte: function(){
+                // 마운트를 하기 이전 단계(화면에 안 보임)
+                console.log('Vue 생명주기 beforeMounte');
+            },
+            mounted: function(){
+                // 인스턴스를 화면에 부착한 상태(화면 출력) / 마운트 단계 이후 제이쿼리와 라이브러리 등 사용 가능
+                console.log('Vue 생명주기 mounted');
+
+                let that = this; // 인스턴스 객체 이름
+                $('.h1-btn').on({
+                    click:function(){
+                        // alert('jQuery 클릭 이벤트'); -> update 되지 않음( 수정된 것이 아니기 때문)
+                        that.num += 1000 // 버튼 자신을 this -> 변수로 만들어야 함
+                    },
+                    focus:function(){
+                        console.log('focus')
+                    } 
+                }); // 객체 메서드 방식
+            },
+            beforeUpdate: function(){
+                // 수정할 내용 -> 수정됨(실제 업데이트)
+                console.log('Vue 생명주기 beforeUpdate');
+            },
+            updated: function(){
+                // 수정된 내용 보여줌(결과만)
+                console.log('Vue 생명주기 updated');
+            },
+            beforeDestroy: function(){
+                // 삭제
+                console.log('Vue 생명주기 beforeDestroy');
+            },
+            destroyed: function(){
+                // 소멸 단계 ( ~ 이벤트만들고 수정 후 끝난 상태 )
+                console.log('Vue 생명주기 destroyed');
+            }
+       });
+    </script>
+</body>
+</html>

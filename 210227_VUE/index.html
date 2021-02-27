@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디렉티브 v-for 반복문</title>
+    <!-- 오픈소스 -->
+    <script src="vue/lib/vue.js"></script>
+    <style>
+        table td{border:1px solid #ccc;padding:10px;text-align: center}
+    </style>
+</head>
+<body>
+    <!-- HTML -->
+    <div id="app">
+        <h1>지인 연락처</h1>
+        <table>
+            <tr><td>이름</td> <td>전화번호</td></tr>
+            <tr v-for="el in addr"><td>{{ el.이름 }}</td> <td>{{ el.전화번호 }}</td></tr>
+            <!-- <tr v-for='변수명 in 데이터 안에 반복할 속성'> -->
+        </table>
+        <main-component></main-component>
+    </div>
+
+    <div id="main">
+        <h1>새로운 영역 생성</h1>
+        <ol>
+            <li>내용1</li>
+            <li>내용2</li>
+            <li>내용3</li>
+            <li>내용4</li>
+        </ol>
+    </div>
+
+    <!-- Vue.js -->
+    <script>
+        var obj = new Vue({
+            el: '#app', // Root
+            data: {     // 프로퍼티(멤버 변수) 설정
+                addr: [
+                    { 이름:'유재석', 전화번호:'010-2345-2345' },
+                    { 이름:'차은우', 전화번호:'010-2353-3345' },
+                    { 이름:'신다연', 전화번호:'010-7385-4345' },
+                    { 이름:'임시완', 전화번호:'010-5355-5345' },
+                    { 이름:'이태민', 전화번호:'010-9145-6345' }
+                ]
+            },
+            components: {
+                'main-component': {
+                    template: '<h1>컴포넌트를 생성하여 템플릿 생성</h1>'
+                }
+            }
+        });
+
+        var main = new Vue({ // 또 다른 뷰 인스턴스 생성
+            el: '#main', // Root
+            data: {      // Root data 속성
+                no: 0
+            }
+        })
+    </script>
+</body>
+</html>
