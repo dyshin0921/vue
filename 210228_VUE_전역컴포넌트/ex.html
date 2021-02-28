@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상위 컴포넌트에서 하위 컴포넌트 통신</title>
+    <!-- 오픈소스 -->
+    <script src="vue/lib/vue.js"></script>
+</head>
+<body>
+    <!-- HTML -->
+    <div id="app">
+        <h1>전역 컴포넌트</h1>
+        <my-component></my-component>
+        <my-component v-bind:mybind="txt"></my-component>
+        <hr>
+        <add-component v-bind:add="num"></add-component>
+        <button type="button" v-on:click="addNum">버튼</button>
+        <hr>
+        <table-component v-for="row in table" v-bind:tdtxt="row"></table-component>
+    </div>
+
+    <!-- Vue.js -->
+    <script>
+        Vue.component('my-component',{
+            props: ['mybind'],
+            template: `<p>실전 연습입니다. {{ mybind }}</p>`
+        });
+
+        Vue.component('add-component',{
+            props: ['add'],
+            template: '<strong>{{ add }}</strong>'
+        });
+
+        Vue.component('table-component',{
+            props: ['tdtxt'],
+            template: `
+            <table>
+                <tr><td>{{ tdtxt.no }}</td><td>{{ tdtxt.한글 }}</td><td>{{ tdtxt.영어 }}</td></tr>
+            </table>
+            `
+        })
+
+        var com = new Vue({
+            el: '#app',
+            data: {
+                txt: 'props 이용하여 bind 시키기',
+                num: 10,
+                table: [
+                    {no:1, 한글:'가', 영어:'a'},
+                    {no:2, 한글:'나', 영어:'b'},
+                    {no:3, 한글:'다', 영어:'c'},
+                    {no:4, 한글:'라', 영어:'d'},
+                    {no:5, 한글:'마', 영어:'e'}
+                ]
+            },
+            methods: {
+                addNum: function(){
+                    this.num += 10;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

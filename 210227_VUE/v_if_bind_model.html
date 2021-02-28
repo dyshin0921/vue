@@ -63,7 +63,7 @@
         <h2>입력상자 텍스트를 이용한 응용 v-model</h2>
         <div class="text-box">
             <label for="irum">회원 이름</label>
-            <input type="text" id="irum" v-model="value" v-on:keyup="eventFn">
+            <input type="text" id="irum" v-model="value" v-on:keyup="eventFn"> <!-- 키보드가 입력이 되고 올라 오면 keyup -->
             <h2>{{ value }}</h2>
             <h3 v-show="x">회원 이름을 입력하세요!</h3>
         </div>
@@ -91,7 +91,7 @@
             },
             methods: {
                 eventFn: function(){
-                    this.x = false; // 키보드가 입력이 되고 올라 오면 keyup
+                    this.x = false; 
                 }
             }
         });

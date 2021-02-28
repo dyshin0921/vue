@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴포넌트 전역 컴포넌트 템플릿</title>
+    <!-- 오픈소스 -->
+    <script src="vue/lib/vue.js"></script>
+</head>
+<body>
+    <!-- HTML (뷰) -->
+    <div id="wrapper">
+        <div id="header">
+            <h1>{{ msg }}</h1>
+            <!-- 상위 컴포넌트에서 하위 컴포넌트에게 통신은 properties(=props 속성) 이용하여 전달 -->
+            <!-- 하위 컴포넌트에서 상위 컴포넌트에게 통신은 event($emit)를 이용하여 전달 -->
+            <nav-component></nav-component> <!-- 가상 요소(JSX). 사용자 정의 태그. 상위 컴포넌트-->
+        </div>
+    </div>
+
+    <!-- Vue.js (모델링) -->
+    <script>
+        // 전역 컴포넌트 생성
+        Vue.component('nav-component',{
+            template:'<h2><mark>전역 컴포넌트 템플릿 속성</mark></h2>' // 하위 컴포넌트
+        });
+
+        // 뷰 인스턴스 생성
+        var header = new Vue({
+            el: '#header',
+            /* 
+            data(){
+                return{
+                    msg: '전역 컴포넌트 생성'
+            }} 메서드 방식(ES6) 
+            */
+            data: {
+                msg: '전역 컴포넌트 생성'
+            }
+        });
+    </script>
+</body>
+</html>

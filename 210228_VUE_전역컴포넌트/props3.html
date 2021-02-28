@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상위 컴포넌트에서 하위 컴포넌트 통신3</title>
+    <!-- 오픈소스 -->
+    <script src="vue/lib/vue.js"></script>
+    <style>
+        *{margin:0;padding:0;vertical-align:middle;border:0}
+        html,body{width:100%;height:100%}
+        html{overflow-y:scroll}
+        body{font:normal 16px/1 '돋움', 'arial';color:#555}
+        ul,ol,li{list-style:none}
+
+        h1{padding:20px}
+        .notice{width:1170px;padding-left:20px}
+        .notice .tit{border-top:1px solid #000;border-bottom:1px solid #000;background:#eee}
+        .notice .tit span{font-weight:bold}
+        .notice .tit span.subject{text-align:center}
+        .notice li{border-bottom:1px solid #ddd;text-align:center}
+        .notice li::after{content:'';display:block;overflow:hidden;clear:both}
+        .notice li span{display:block;float:left;padding:17px 0}
+        .notice li span.no{width:6%}
+        .notice li span.subject{width:74%;padding-left:20px;box-sizing:border-box;text-align:left}
+        .notice li span.subject a:hover{color:#000;text-decoration:underline;cursor:pointer}
+        .notice li span.date{width:10%}
+        .notice li span.count{width:10%}
+    </style>
+</head>
+<body>
+    <!-- HTML -->
+    <div id="section">
+        <h1>공지사항</h1>
+        <div class="notice">
+            <ul class="tit">
+                <li>
+                    <span class="no">NO</span>
+                    <span class="subject">제목</span>
+                    <span class="date">날짜</span>
+                    <span class="count">조회수</span>
+                </li>
+            </ul>
+            <ul>
+                <!-- 반복문일 경우 item을 propsbind에 바인딩 시킨다. 템플릿에서 propsbind.no ~ -->
+                <notice-component v-for="item in notice" v-bind:propsbind="item"></notice-component>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Vue.js -->
+    <script>
+        // 전역 컴포넌트
+        Vue.component('notice-component',{
+            props: ['propsbind'],
+            template: '\
+                <li>\
+                    <span class="no">{{ propsbind.no }}</span>\
+                    <span class="subject"><a>{{ propsbind.제목 }}</a></span>\
+                    <span class="date">{{ propsbind.날짜 }}</span>\
+                    <span class="count">{{ propsbind.조회수 }}</span>\
+                </li>\
+                '
+        });
+
+        // 뷰 인스턴스 생성
+        var section = new Vue({
+            el: '#section',
+            data: {
+                notice: [
+                    {no:301, 제목:"시스템 개선 및 점검 안내", 날짜:"2021-02-25", 조회수:7658},
+                    {no:300, 제목:"SSG PAY 결제 서비스 일시 이용 중지 안내", 날짜:"2021-02-15", 조회수:4550},
+                    {no:299, 제목:"스타벅스 홈페이지/애플리케이션 일부 서비스 종료 안내", 날짜:"2021-02-15", 조회수:38725},
+                    {no:298, 제목:"시스템 개선 및 점검 안내", 날짜:"2021-02-10", 조회수:54323},
+                    {no:297, 제목:"스타벅스 Web/App 결제 수단 변경 안내", 날짜:"2021-02-10", 조회수:4544},
+                    {no:296, 제목:"설 연휴 스타벅스 딜리버스 운영 시간 안내", 날짜:"2021-02-09", 조회수:3534},
+                    {no:295, 제목:"설 연휴 스타벅스 매장 영업시간 변경 안내", 날짜:"2021-02-04", 조회수:13777},
+                    {no:294, 제목:"시스템 개선 및 점검 안내", 날짜:"2021-02-03", 조회수:15357},
+                    {no:293, 제목:"개인정보 처리방침 개정안내", 날짜:"2021-01-28", 조회수:7658}
+                ]
+            },
+        });
+    </script>
+</body>
+</html>
