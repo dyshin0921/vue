@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상위에서 하위에게 통신 props</title>
+    <!-- 오픈소스 -->
+    <script src="vue/lib/vue.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="food">
+        <h2>지역 컴포넌트 객체 배열 데이터 props 이용한 통신</h2>
+        <ol>
+            <data-comp v-for='item in foodData' v-bind:propsdata="item"></data-comp> 
+            <!-- {{ item.name }} 으로도 사용 가능, 하나만 쓸 때 -->
+        </ol>
+    </div>
+
+    <script>
+        var dataComp = {
+            props: ['propsdata'],
+            template: '<li>음식코드 : {{ propsdata.id }}, &nbsp; 음식이름 : {{ propsdata.name }}</li>' 
+        };
+
+        var food = new Vue({
+            el: '#food',
+            data: {
+                foodData: [
+                    {id:'A01', name:'치킨'},
+                    {id:'B02', name:'피자'},
+                    {id:'C03', name:'탕수육'},
+                    {id:'D04', name:'김밥'},
+                    {id:'E05', name:'케이크'}
+                ]
+            },
+            components: {
+                'data-comp': dataComp
+            }
+        });
+    </script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상위에서 하위에게 통신 props</title>
+    <!-- 오픈소스 -->
+    <script src="vue/lib/vue.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="app">
+        <h1>상위 컴포넌트에서 하위 컴포넌트로의 통신 : props 사용</h1>
+        <button @click="countFn">버튼</button> <!-- 버튼클릭 이벤트로 상위 > 하위 통신 -->
+        <app-comp v-bind:propsdata="num"></app-comp> <!-- 하위 컴포넌트 -->
+    </div>
+
+    <script>
+        var appComp = {
+            props: ['propsdata'], // 반드시 대괄호
+            template: '<h1>지역 컴포넌트 템플릿 내용 {{ propsdata }}</h1>'
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num: 1000000  // 상위 컴포넌트
+            },
+            components: {
+                'app-comp': appComp
+            },
+            methods: {
+                countFn: function(){
+                    this.num += 1000;
+                }
+            },
+            watch: { // 감시자 역할(감시하고 데이터를 뽑아준다)
+                num: function(){
+                    console.log('데이터 변환', this.num );
+                }
+            }
+        });        
+    </script>
+</div>
+
+</body>
+</html>
