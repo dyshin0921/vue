@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <!-- 오픈소스 -->
     <script src="vue/lib/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -67,7 +68,7 @@
 
     <!-- 메인 영역 -->
     <div id="main">
-        <section1-component></section1-component>  
+        <section1-component @emitevent="updateFiledata" :propssec1="filedata"></section1-component>  
     </div>
 
     <script>
@@ -85,16 +86,29 @@
                                 </h2>\
                                 <h3>CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
                                 <p>\
-                                    <span><a href="javascript:;" @click="popup(\'popup/main1.html\',\'argument\')">OUR SERVICES</a></span>\
+                                    <span><a href="javascript:;" @click="popup(\'popup/main\'+ propssec1 +\'.html\',\'Window Popup \'+ propssec1 +\' \')">OUR SERVICES</a></span>\
                                 </p>\
                             </div>\
                         </div>\
                     </div>\
                 </section>\
             ',
-            methods: { // 단방향으로 변수 안에 선언해야 함(하위>상위 호출 불가능)
+            methods: { 
                 popup: function(a,b){
-                    window.open(a); // 새 창 열기
+                    // 하위 컴포넌트에서 이벤트를 발생시켜 
+                    // 상위 컴포넌트에 이벤트 전달할 이벤트이름 생성 $emit
+                    // 생성된 이벤트이름을 상위 컴포넌트의 데이터 속성을 할당하고 활성화한다(v-on:이벤트이름=메서드함수 호출)
+
+                    // 상위 컴포넌트에 데이터 속성(filedat) 값을 100씩 증가
+                    // 증가(변경)된 값을 props를 통해 하위 컴포넌트에 값 전달 > 변경된 팝업 파일을 띄운다
+
+                    this.$emit('emitevent'); // 에밋 메서드 실행(이벤트 생성)
+                    console.log(a,b);
+
+                    var url = a;
+                    var name = b;
+                    var option = "width=500, height=600, top=100, left=300, location=no";
+                    window.open(url, name, option); // 새 창 열기
                     // location.href = a  현재 창에서 열기
                 }
             }
@@ -103,10 +117,49 @@
         var main = new Vue({
             el: '#main',
             data: {
-                filedata: 0,
+                filedata: 100,
             },
             components: {
                 'section1-component': section1Component
+            },
+            methods: {
+                updateFiledata: function(){
+                    if( this.filedata >= 300 ){
+                        this.filedata = 100
+                    }else{
+                        this.filedata += 100;
+                    }
+                }
+            },
+            mounted: function(){
+                // 화면에 부착이 완료된 상태
+                // 창너비(window.innerWidth)와 창높이(window.innerHeight)를 반응형에 적용
+                var $winH = window.innerHeight;
+                var $section1 = document.querySelector('#section1');
+
+                function resizeFn(){
+                    var $winH = window.innerHeight;
+    
+                    $section1.style = 'height:' + $winH + 'px';
+                    // $section1.style.height = $winH + 'px'; 같은 값 (높이 하나만 설정)
+                }
+                resizeFn(); // 마운트 완료 시 실행 1회
+
+                window.addEventListener('resize',resizeFn) // 창 크기 변경 시 즉각 반응하여 함수 호출 실행하는 이벤트리스너
+
+                /* JQuery
+
+                var $winH = $(window).innerHeight();
+                var $section1 = $('#section1');
+                function resizeFn(){
+                    var $winH = $(window).innerHeight();
+                    $section1.css({height: $winH})
+                }
+                resizeFn();
+                $(window).resize(function(){
+                    resizeFn();
+                }); 
+                */
             }
         });
     </script>

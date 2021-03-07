@@ -1,0 +1,9 @@
+{
+    "item":[
+        {"name":"이진기","age":33,"email":"abc@naver.com"},
+        {"name":"김종현","age":31,"email":"abcd@naver.com"},
+        {"name":"김기범","age":30,"email":"abce@naver.com"},
+        {"name":"최민호","age":30,"email":"abcf@naver.com"},
+        {"name":"이태민","age":29,"email":"abcg@naver.com"}
+    ]
+}
