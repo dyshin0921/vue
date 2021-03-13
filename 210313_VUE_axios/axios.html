@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax promise json 데이터 처리 axios</title>
+    <!-- 오픈소스 -->
+    <script src="vue/lib/vue.js"></script>
+    <script src="vue/lib/axios.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="wrap">
+    <div id="app">
+        <h1>회원관리</h1>
+        <table class="member">
+            <tr>
+                <th>번호</th>
+                <th>ID</th>
+                <th>PASSWORD</th>
+                <th>EMAIL</th>
+            </tr>
+            <tr v-for="(row, idx) in arr">
+                <td>{{ idx+1 }}</td>
+                <td>{{ row.userId }}</td>
+                <td>{{ row.userPw }}</td>
+                <td>{{ row.email }}</td>
+            </tr>
+        </table>
+
+        <div class="btn_box">
+            <button @click.prevent="axiosJsonFn">멤버 출력</button>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                arr: []
+            },
+            methods: {
+                axiosJsonFn: function(){
+                    var url = "data/member.json";
+                    axios.get(url)
+                        .then((response) => {
+                            console.log(response);
+                            this.arr = response.data.member; // member자리엔 객체배열속성(프로퍼티)
+
+                            response.data.member.forEach(function(row, idx){
+                                console.log(row.userId);
+                                // = console.log(response.data.member[idx].userId);
+                                console.log(idx, row.userId, row.userPw, row.email);
+                            })
+                        })
+                        /* .then(function(response){
+                            같은 의미
+                        }) */
+                }
+            }
+        });
+    </script>
+</div>
+
+</body>
+</html>

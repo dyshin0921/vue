@@ -1,0 +1,12 @@
+{
+    "member":[
+        {"userId":"aaaaa","userPw":"11111","email":"aaa@gmail.com"},
+        {"userId":"bbbbb","userPw":"22222","email":"bbb@gmail.com"},
+        {"userId":"ccccc","userPw":"33333","email":"ccc@gmail.com"},
+        {"userId":"ddddd","userPw":"44444","email":"ddd@gmail.com"},
+        {"userId":"eeeee","userPw":"55555","email":"eee@gmail.com"},
+        {"userId":"fffff","userPw":"66666","email":"fff@gmail.com"},
+        {"userId":"ggggg","userPw":"77777","email":"ggg@gmail.com"},
+        {"userId":"hhhhh","userPw":"88888","email":"hhh@gmail.com"}
+    ]
+}

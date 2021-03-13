@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+/* axios.html */
+#wrap{width: 100%}
+#wrap #app{width: 100%}
+#wrap #app h1{text-align: center;color: #000;padding: 30px}
+#wrap #app .member{width: 800px;margin:0 auto}
+#wrap #app .member th,
+#wrap #app .member td{border:1px solid #ccc;height: 48px;text-align: center}
+#wrap #app .btn_box{padding-top: 20px;text-align: center}
+#wrap #app .btn_box button{background: lightsteelblue;color: #fff;font-size: 17px;padding: 15px 30px;cursor: pointer;border:none}
+#wrap #app .btn_box button:hover{background: #666}
+#wrap #app .btn_box button:active{background: #999}
+
+/* index.html */
+#formWrap #app{width: 800px;margin: 0 auto}
+#formWrap #app h1{text-align: center;color: #000;padding: 30px}
+#formWrap #app form{padding: 50px}
+#formWrap #app form .form-box ul li div{padding: 5px 0}
+#formWrap #app form .form-box ul li div label{display: inline-block;width: 100px}
+#formWrap #app form .form-box ul li div input[type="text"],
+#formWrap #app form .form-box ul li div input[type="password"]{width:500px;height: 20px;padding: 10px;border:1px solid #ccc}
+#formWrap #app form .btn-box{padding-top: 30px;text-align: center}
+#formWrap #app form .btn-box input[type="button"]{width: 300px;height: 38px;background: #333;color: #fff}
